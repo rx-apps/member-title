@@ -1,4 +1,28 @@
 {@ // <!--suppress CheckEmptyScriptTag, HtmlUnknownTag, HtmlUnknownAttribute --> }
 <include target="components/header.html" />
 
-개발중입니다.
+<form method="POST" action="/">
+	<input type="hidden" name="module" value="admin" />
+	<input type="hidden" name="act" value="procMember_titleAdminTitleDelete" />
+	<input type="hidden" name="xe_validator_id" value="modules/member_title" />
+	<input type="hidden" name="title_srl" value="{$title_srl}" />
+	
+	<h1>{$lang->confirm_delete}</h1>
+	<dl class="x_dl-horizontal">
+		<dt>{$lang->member_title_admin_lbl_member_title_title}</dt>
+		<dd>{$title->title}</dd>
+		<dt>{$lang->member_title_admin_lbl_member_title_description}</dt>
+		<dd>{$title->description}</dd>
+		<dt>{$lang->member_title_admin_lbl_member_title_type}</dt>
+		<dd>{Context::getLang('member_title_admin_menu_type_' . $title->type)}</dd>
+		<dt>{$lang->member_title_admin_lbl_member_title_content}</dt>
+		<dd>{$title->content}</dd>
+		<dt>{$lang->member_title_admin_lbl_member_title_option}</dt>
+		<dd>{$title->option}</dd>
+	</dl>
+	
+	<div class="btnArea">
+		<button type="button" class="x_btn" onclick="history.go(-1);">{$lang->cmd_cancel}</button>
+		<input type="submit" class="x_btn x_btn-primary" value="{$lang->cmd_delete}" />
+	</div>
+</form>

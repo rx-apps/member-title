@@ -1,0 +1,8 @@
+<query id="deleteTitle" action="delete">
+	<tables>
+		<table name="member_title_titles" />
+	</tables>
+	<conditions>
+		<condition operation="equal" column="title_srl" var="title_srl" filter="number" notnull="notnull" />
+	</conditions>
+</query>

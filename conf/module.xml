@@ -14,5 +14,6 @@
 		<action name="procMember_titleAdminIndex" type="controller" />
 		<action name="procMember_titleAdminMemberTitle" type="controller" />
 		<action name="procMember_titleAdminTitleInsert" type="controller" />
+		<action name="procMember_titleAdminTitleDelete" type="controller" />
 	</actions>
 </module>

@@ -19,7 +19,7 @@ class Member_titleAdminController extends Member_title
 	public function insertTitle(string $title, string $description, string $type, string $content, string $option = ''): int
 	{
 		$title_srl = getNextSequence();
-		$output = executeQuery('member_title.insertTitle', (object) [
+		$output = executeQuery('member_title.insertTitle', [
 			'title_srl' => $title_srl,
 			'title' => $title,
 			'description' => $description,
@@ -51,7 +51,7 @@ class Member_titleAdminController extends Member_title
 	 */
 	public function updateTitle(int $title_srl, string $title, string $description, string $type, string $content, string $option = ''): bool
 	{
-		$output = executeQuery('member_title.updateTitle', (object) [
+		$output = executeQuery('member_title.updateTitle', [
 			'title_srl' => $title_srl,
 			'title' => $title,
 			'description' => $description,
@@ -61,6 +61,27 @@ class Member_titleAdminController extends Member_title
 			'regdate' => date('YmdHis')
 		]);
 
+		if(!$output->toBool())
+		{
+			throw new DBError($output->message);
+		}
+		
+		return true;
+	}
+
+	/**
+	 * 칭호를 삭제합니다.
+	 * 
+	 * @param int $title_srl
+	 * @return bool
+	 * @throws DBError
+	 */
+	public function deleteTitle(int $title_srl): bool
+	{
+		$output = executeQuery('member_title.deleteTitle', [
+			'title_srl' => $title_srl
+		]);
+		
 		if(!$output->toBool())
 		{
 			throw new DBError($output->message);
@@ -129,6 +150,21 @@ class Member_titleAdminController extends Member_title
 			$this->setMessage('success_updated');
 		}
 		
+		$this->setRedirectUrl(getNotEncodedUrl('', 'module', 'admin', 'act', 'dispMember_titleAdminTitleList'));
+	}
+
+	/**
+	 * 칭호를 삭제하는 메뉴입니다.
+	 * 
+	 * @return void
+	 * @throws DBError
+	 */
+	public function procMember_titleAdminTitleDelete()
+	{
+		$title_srl = Context::get('title_srl');
+		$this->deleteTitle($title_srl);
+
+		$this->setMessage('success_deleted');
 		$this->setRedirectUrl(getNotEncodedUrl('', 'module', 'admin', 'act', 'dispMember_titleAdminTitleList'));
 	}
 }

@@ -65,8 +65,8 @@ $lang->member_title_admin_menu_type_mixed = '혼합형';
 /**
  * 관리자 페이지 칭호 설정
  */
-$lang->member_title_admin_lbl_member_title_title = '칭호 이름';
-$lang->member_title_admin_txt_member_title_title = '칭호의 이름을 입력해 주세요. 칭호를 잘 표현할 수 있는 이름이 좋습니다.';
+$lang->member_title_admin_lbl_member_title_title = '칭호명';
+$lang->member_title_admin_txt_member_title_title = '칭호명을 입력해 주세요. 칭호를 잘 표현할 수 있는 이름이 좋습니다.';
 $lang->member_title_admin_lbl_member_title_description = '칭호 설명';
 $lang->member_title_admin_txt_member_title_description = '칭호의 설명을 입력해 주세요. 스킨에 따라 사용자가 해당 설명을 볼 수 있으므로 명확하게 작성하는 것이 좋습니다.';
 $lang->member_title_admin_lbl_member_title_type = '타입';

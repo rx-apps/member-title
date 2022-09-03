@@ -277,7 +277,7 @@ class Member_titleAdminView extends Member_title
 		
 		$oModel = $this->getModel();
 		$title = $oModel->getTitle($title_srl);
-		if (!$title)
+		if(!$title)
 		{
 			throw new TargetNotFound();
 		}
@@ -295,6 +295,17 @@ class Member_titleAdminView extends Member_title
 	 */
 	public function dispMember_titleAdminTitleDelete()
 	{
+		$title_srl = Context::get('title_srl');
+		
+		$oModel = $this->getModel();
+		$title = $oModel->getTitle($title_srl);
+		if(!$title)
+		{
+			throw new TargetNotFound();
+		}
+
+		Context::set('title', $title);
+
 		$this->setMenuVisible(4);
 		$this->setTemplateFile('title_delete');
 	}

@@ -2,8 +2,8 @@
 <module version="0.2">
 	<title xml:lang="ko">회원 칭호</title>
 	<description xml:lang="ko">회원에게 칭호를 부여합니다.</description>
-	<version>0.0.1</version>
-	<date>2022-08-31</date>
+	<version>0.0.2</version>
+	<date>2022-09-04</date>
 	<author email_address="rxapps@qroffle.com" link="https://github.com/rx-apps">
 		<name xml:lang="ko">rxApps</name>
 	</author>

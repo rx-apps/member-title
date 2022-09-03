@@ -1,0 +1,14 @@
+<query id="insertTitle" action="insert">
+	<tables>
+		<table name="member_title_titles" />
+	</tables>
+	<columns>
+		<column name="title_srl" var="title_srl" filter="number" notnull="notnull" />
+		<column name="title" var="title" notnull="notnull" />
+		<column name="description" var="description" notnull="notnull" />
+		<column name="type" var="type" notnull="notnull" />
+		<column name="content" var="content" notnull="notnull" />
+		<column name="option" var="option" notnull="notnull" default="" />
+		<column name="regdate" var="regdate" />
+	</columns>
+</query>

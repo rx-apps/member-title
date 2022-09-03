@@ -1,0 +1,27 @@
+{@ // <!--suppress CheckEmptyScriptTag, HtmlUnknownTag, HtmlUnknownAttribute --> }
+<load target="../scss/style.scss" />
+<load target="../js/script.js" type="body" />
+
+<include target="helper.php" />
+
+<div class="x_page-header">
+	<h1>
+		{$lang->member_title_title}
+	</h1>
+</div>
+
+<!--@if($XE_VALIDATOR_MESSAGE && $XE_VALIDATOR_ID == 'modules/member_title')-->
+	<div class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+		<p>{$XE_VALIDATOR_MESSAGE}</p>
+	</div>
+<!--@endif-->
+
+<ul class="x_nav x_nav-tabs">
+	<!--@foreach($menus as $menu)-->
+		<li class="x_active"|cond="in_array($act, $menu[1])" cond="$menu[2] ?? true">
+			<a href="{getUrl('', 'module', 'admin', 'act', $menu[1][0])}">
+				{Context::getLang($menu[0])}
+			</a>
+		</li>
+	<!--@endforeach-->
+</ul>

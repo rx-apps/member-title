@@ -1,0 +1,85 @@
+{@ // <!--suppress CheckEmptyScriptTag, HtmlUnknownTag, HtmlUnknownAttribute --> }
+<include target="components/header.html" />
+
+<form method="POST" action="/" class="x_form-horizontal">
+	<input type="hidden" name="module" value="admin" />
+	<input type="hidden" name="act" value="procMember_titleAdminTitleInsert" />
+	<input type="hidden" name="xe_validator_id" value="modules/member_title" />
+	<input type="hidden" name="title_srl" value="{$title_srl}" />
+	
+	<div class="x_control-group">
+		<label class="x_control-label">
+			{$lang->member_title_admin_lbl_member_title_title}
+		</label>
+		<div class="x_controls">
+			<input type="text" name="title" value="{$title->title}" required />
+			<p class="x_help-block">
+				{$lang->member_title_admin_txt_member_title_title}
+			</p>
+		</div>
+	</div>
+	
+	<div class="x_control-group">
+		<label class="x_control-label">
+			{$lang->member_title_admin_lbl_member_title_description}
+		</label>
+		<div class="x_controls">
+			<textarea name="description">{$title->description}</textarea>
+			<p class="x_help-block">
+				{$lang->member_title_admin_txt_member_title_description}
+			</p>
+		</div>
+	</div>
+	
+	<div class="x_control-group">
+		<label class="x_control-label">
+			{$lang->member_title_admin_lbl_member_title_type}
+		</label>
+		<div class="x_controls">
+			<select name="type">
+				{@ $types = [ 'text', 'image', 'mixed' ]; }
+				<!--@foreach($types as $type)-->
+					<option value="{$type}" selected|cond="$title->type == $type">
+						{Context::getLang('member_title_admin_menu_type_' . $type)}
+					</option>
+				<!--@endforeach-->
+			</select>
+			<p class="x_help-block">
+				{$lang->member_title_admin_txt_member_title_type}
+			</p>
+		</div>
+	</div>
+	
+	<div class="x_control-group">
+		<label class="x_control-label">
+			{$lang->member_title_admin_lbl_member_title_content}
+		</label>
+		<div class="x_controls">
+			<input type="text" name="content" value="{$title->content}" />
+			<p class="x_help-block">
+				{$lang->member_title_admin_txt_member_title_content}
+			</p>
+		</div>
+	</div>
+	
+	<div class="x_control-group">
+		<label class="x_control-label">
+			{$lang->member_title_admin_lbl_member_title_option}
+		</label>
+		<div class="x_controls">
+			<textarea name="option">{$title->option}</textarea>
+			<p class="x_help-block">
+				{$lang->member_title_admin_txt_member_title_option}
+			</p>
+		</div>
+	</div>
+	
+	<div class="x_clearfix btnArea">
+		<!--@if($title_srl)-->
+			<button type="button" class="x_btn" onclick="history.go(-1);">
+				{$lang->cmd_cancel}
+			</button>
+		<!--@endif-->
+		<input type="submit" class="x_btn x_btn-primary" value="{$lang->cmd_save}" />
+	</div>
+</form>

@@ -1,0 +1,7 @@
+<table name="member_title_members">
+	<column name="member_srl" type="number" size="20" notnull="notnull" primary_key="primary_key" />
+	
+	<column name="title_srl" type="number" size="20" notnull="notnull" index="title_srl" />
+	
+	<column name="last_update" type="date" index="idx_last_update" />
+</table>

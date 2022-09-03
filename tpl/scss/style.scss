@@ -1,0 +1,27 @@
+section {
+  h2 {
+	padding: 0 0 5px 3px;
+  }
+  
+  .x_controls {
+	&.margin-top {
+	  margin-top: 5px;
+	}
+  }
+}
+
+.no_profile {
+  display: block;
+  width: 40px;
+  height: 40px;
+  
+  border: 1px solid #DDD;
+  border-radius: 50%;
+  background: #FFF;
+  
+  font-size: 16px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 40px;
+  text-align: center;
+}

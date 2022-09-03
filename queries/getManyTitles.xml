@@ -1,0 +1,11 @@
+<query id="getManyTitles" action="select">
+	<tables>
+		<table name="member_title_titles" />
+	</tables>
+	<columns>
+		<column name="*" />
+	</columns>
+	<conditions>
+		<condition operation="equal" column="title_srl" var="title_srls" />
+	</conditions>
+</query>

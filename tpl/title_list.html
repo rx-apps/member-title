@@ -1,0 +1,159 @@
+{@ // <!--suppress CheckEmptyScriptTag, HtmlUnknownTag, HtmlUnknownAttribute --> }
+<include target="components/header.html" />
+
+<table id="title_list" class="x_table x_table-striped x_table-hover">
+	<caption>
+		<a href="{getUrl('', 'module', 'admin', 'act', 'dispMember_titleAdminTitleList')}" class="active"|cond="!$type">
+			{$lang->member_title_admin_btn_all_titles}
+			<!--@if(!$type)-->
+				({number_format($total_count)})
+			<!--@endif-->
+		</a>
+		<i class="vr">|</i>
+		<a href="{getUrl('', 'module', 'admin', 'act', 'dispMember_titleAdminTitleList', 'type', 'text')}" class="active"|cond="$type == 'text'">
+			{$lang->member_title_admin_menu_type_text}
+			<!--@if($type == 'text')-->
+				({number_format($total_count)})
+			<!--@endif-->
+		</a>
+		<i class="vr">|</i>
+		<a href="{getUrl('', 'module', 'admin', 'act', 'dispMember_titleAdminTitleList', 'type', 'image')}" class="active"|cond="$type == 'image'">
+			{$lang->member_title_admin_menu_type_image}
+			<!--@if($type == 'image')-->
+				({number_format($total_count)})
+			<!--@endif-->
+		</a>
+		<i class="vr">|</i>
+		<a href="{getUrl('', 'module', 'admin', 'act', 'dispMember_titleAdminTitleList', 'type', 'mixed')}" class="active"|cond="$type == 'mixed'">
+			{$lang->member_title_admin_menu_type_mixed}
+			<!--@if($type == 'mixed')-->
+				({number_format($total_count)})
+			<!--@endif-->
+		</a>
+		
+		<div class="x_pull-right x_btn-group">
+			<a href="{getUrl('', 'module', 'admin', 'act', 'dispMember_titleAdminTitleInsert')}" class="x_btn x_btn-inverse">
+				{$lang->member_title_admin_btn_insert_title}
+			</a>
+		</div>
+	</caption>
+	<thead>
+		<tr>
+			<th scope="col" class="nowr">
+				{$lang->member_title_admin_lbl_title}
+			</th>
+			<th scope="col" class="nowr">
+				{$lang->member_title_admin_lbl_description}
+			</th>
+			<th scope="col" class="nowr">
+				{$lang->member_title_admin_lbl_preview}
+			</th>
+			<th scope="col" class="nowr">
+				{$lang->member_title_admin_lbl_type}
+			</th>
+			<th scope="col" class="nowr">
+				{$lang->member_title_admin_lbl_content}
+			</th>
+			<th scope="col" class="nowr">
+				{$lang->regdate}
+			</th>
+			<th scope="col" class="nowr">
+				{$lang->cmd_modify} / {$lang->cmd_delete}
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<!--@foreach($title_list as $title)-->
+			<tr>
+				<td class="nowr">
+					{$title->title}
+				</td>
+				<td class="nowr">
+					{$title->description}
+				</td>
+				<td class="nowr">
+					{$title->preview}
+				</td>
+				<td class="nowr">
+					{Context::getLang('member_title_admin_menu_type_' . $title->type)}
+				</td>
+				<td class="nowr">
+					{$title->content}
+				</td>
+				<td class="nowr" title="{zdate($title->regdate, 'Y-m-d H:i:s')}">
+					{zdate($title->regdate, 'Y-m-d')}
+				</td>
+				<td class="nowr">
+					<a href="{getUrl('', 'module', 'admin', 'act', 'dispMember_titleAdminTitleUpdate', 'title_srl', $title->title_srl)}">
+						{$lang->cmd_modify}
+					</a>
+					/
+					<a href="{getUrl('', 'module', 'admin', 'act', 'dispMember_titleAdminTitleDelete', 'title_srl', $title->title_srl)}">
+						{$lang->cmd_delete}
+					</a>
+				</td>
+			</tr>
+		<!--@endforeach-->
+		<!--@if($total_count == 0)-->
+			<tr>
+				<td>{$lang->msg_no_result}</td>
+			</tr>
+		<!--@endif-->
+	</tbody>
+</table>
+
+<div class="x_clearfix">
+	<!--@if($page_navigation)-->
+	<form method="GET" action="/" class="x_pagination x_pull-left" no-error-return-url="true" style="margin: 0">
+		<input type="hidden" name="module" value="admin" />
+		<input type="hidden" name="act" value="dispMember_titleMemberList" />
+
+		<ul>
+			<li class="x_disabled"|cond="!$page || $page == 1">
+				<a href="{getUrl('page', '')}">
+					&laquo; {$lang->first_page}
+				</a>
+			</li>
+
+			<!--@if($page_navigation->first_page != 1 && $page_navigation->first_page + $page_navigation->page_count > $page_navigation->last_page - 1 && $page_navigation->page_count != $page_navigation->total_page)-->
+				<li>
+					<a href="#first_go_to" data-toggle title="{$lang->cmd_go_to_page}">&hellip;</a>
+					<span id="first_go_to" class="x_input-append">
+						<input type="number" min="1" max="{$page_navigation->last_page}" required name="page" title="{$lang->cmd_go_to_page}" />
+						<button type="submit" class="x_add-on">Go</button>
+					</span>
+				</li>
+			<!--@endif-->
+
+			<!--@while($page_no = $page_navigation->getNextPage())-->
+				{@ $last_page = $page_no; }
+				<li class="x_active"|cond="$page_no == $page">
+					<a href="{getUrl('page', $page_no)}">{$page_no}</a>
+				</li>
+			<!--@endwhile-->
+
+			<!--@if($last_page != $page_navigation->last_page && $last_page + 1 != $page_navigation->last_page)-->
+				<li>
+					<a href="#last_go_to" data-toggle title="{$lang->cmd_go_to_page}">&hellip;</a>
+					<span id="last_go_to" class="x_input-append">
+						<input type="number" min="1" max="{$page_navigation->last_page}" required name="page" title="{$lang->cmd_go_to_page}" />
+						<button type="submit" class="x_add-on">Go</button>
+					</span>
+				</li>
+			<!--@endif-->
+
+			<li class="x_disabled"|cond="$page == $page_navigation->last_page">
+				<a href="{getUrl('page', $page_navigation->last_page)}" title="{$page_navigation->last_page}">
+					{$lang->last_page} &raquo;
+				</a>
+			</li>
+		</ul>
+	</form>
+	<!--@endif-->
+
+	<div class="x_pull-right x_btn-group">
+		<a href="{getUrl('', 'module', 'admin', 'act', 'dispMember_titleAdminTitleInsert')}" class="x_btn x_btn-inverse">
+			{$lang->member_title_admin_btn_insert_title}
+		</a>
+	</div>
+</div>

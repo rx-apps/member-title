@@ -1,0 +1,23 @@
+<query id="getManyTitlesWithPagination" action="select">
+	<tables>
+		<table name="member_title_titles" />
+	</tables>
+	<columns>
+		<column name="*" />
+	</columns>
+	<conditions>
+		<condition operation="in" column="title_srl" var="title_srls" />
+		<condition operation="equal" column="type" var="type" pipe="and" />
+		<group pipe="and">
+			<condition operation="like" column="title" var="title" />
+			<condition operation="like" column="description" var="description" pipe="or" />
+			<condition operation="like" column="content" var="content" pipe="or" />
+		</group>
+	</conditions>
+	<navigation>
+		<index var="sort_index" default="regdate" order="sort_order" />
+		<list_count var="list_count" default="20" />
+		<page_count var="page_count" default="10" />
+		<page var="page" default="1" />
+	</navigation>
+</query>

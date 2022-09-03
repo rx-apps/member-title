@@ -1,0 +1,13 @@
+{@ // <!--suppress HtmlUnknownTag HtmlUnknownAttribute --> }
+<load target="scss/title.scss" />
+
+<!--@if($title->type == 'text')-->
+	{@ $style = 'style="background-color: ' . $title->option . ';"'; } 
+	<span class="mt mt-text" {$style}>
+		<span>{$title->content}</span>
+	</span>
+<!--@elseif($title->type == 'image')-->
+	<span class="mt mt-image">
+		<img src="{$title->content}" alt="{$title->title}" />
+	</span>
+<!--@endif-->

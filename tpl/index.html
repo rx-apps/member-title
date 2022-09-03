@@ -1,0 +1,55 @@
+{@ // <!--suppress CheckEmptyScriptTag, HtmlUnknownTag, HtmlUnknownAttribute --> }
+<include target="components/header.html" />
+
+<section class="section">
+	<h2>
+		{$lang->member_title_admin_tit_check_update}
+	</h2>
+	
+	<div class="x_form-horizontal">
+		<!--// 최신버전 여부 -->
+		<div class="x_control-group">
+			<label class="x_control-label">
+				{$lang->member_title_admin_lbl_is_updated}
+			</label>
+			<div class="x_controls margin-top">
+				<!--@if($is_github_updated)-->
+					<b class="x_text-success">
+						{sprintf($lang->member_title_admin_txt_already_updated, $current_version)}
+					</b>
+				<!--@else-->
+					<b class="x_text-error">
+						{sprintf($lang->member_title_admin_txt_need_update, $github_version)}
+					</b>
+				<!--@endif-->
+			</div>
+		</div>
+		
+		<!--// 깃헙 링크 -->
+		<div class="x_control-group">
+			<label class="x_control-label">
+				{$lang->member_title_admin_lbl_github_url}
+			</label>
+			<div class="x_controls margin-top">
+				<a href="{$github_url}" target="_blank">
+					{$github_url}
+				</a>
+				<p class="x_help-block">
+					{$lang->member_title_admin_txt_github_url}
+				</p>
+			</div>
+		</div>
+		
+		<!--// 광고 -->
+		<div class="x_control-group">
+			<label class="x_control-label">
+				{$lang->member_title_admin_lbl_advertisement}
+			</label>
+			<div class="x_controls margin-top">
+				<a href="{$lang->member_title_admin_txt_advertisement_url}" target="_blank">
+					{$lang->member_title_admin_txt_advertisement_name}
+				</a>
+			</div>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,15 @@
+<query id="updateTitle" action="update">
+	<tables>
+		<table name="member_title_titles" />
+	</tables>
+	<columns>
+		<column name="title" var="title" notnull="notnull" />
+		<column name="description" var="description" notnull="notnull" />
+		<column name="type" var="type" notnull="notnull" />
+		<column name="content" var="content" notnull="notnull" />
+		<column name="option" var="option" notnull="notnull" default="" />
+	</columns>
+	<conditions>
+		<condition operation="equal" column="title_srl" var="title_srl" filter="number" notnull="notnull" />
+	</conditions>
+</query>

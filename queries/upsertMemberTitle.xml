@@ -1,0 +1,10 @@
+<query id="upsertMemberTitle" action="insert" update-duplicate="true">
+	<tables>
+		<table name="member_title_members" />
+	</tables>
+	<columns>
+		<column name="member_srl" var="member_srl" filter="number" notnull="notnull" />
+		<column name="title_srl" var="title_srl" filter="number" notnull="notnull" />
+		<column name="last_update" var="last_update" />
+	</columns>
+</query>

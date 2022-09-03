@@ -1,0 +1,191 @@
+{@ // <!--suppress CheckEmptyScriptTag, HtmlUnknownTag, HtmlUnknownAttribute --> }
+<include target="components/header.html" />
+
+<table id="member_list" class="x_table x_table-striped x_table-hover">
+	<thead>
+		<tr>
+			<!--@if($member_config->member_profile_view == 'Y')-->
+				<th scope="col" class="nowr rx_detail_marks">
+					{$lang->profile_image}
+				</th>
+			<!--@endif-->
+			<!--@foreach($used_identifiers as $name => $title)-->
+				<th scope="col" class="nowr">
+					<a href="{getUrl('', 'module', 'admin', 'act', 'dispMember_titleAdminMemberList', 'sort_index', $name, 'sort_order', ($sort_order == 'asc') ? 'desc' : 'asc')}">
+						{$title}
+						<!--@if($sort_index == $name)-->
+							<!--@if($sort_order == 'asc')-->
+								<em>▲</em>
+							<!--@else-->
+								<em>▼</em>
+							<!--@endif-->
+						<!--@endif-->
+					</a>
+				</th>
+			<!--@endforeach-->
+			<th scope="col" class="nowr">
+				{$lang->member_title_admin_lbl_title}
+			</th>
+			<th scope="col" class="nowr rx_detail_marks">
+				<a href="{getUrl('', 'module', 'admin', 'act', 'dispMember_titleAdminMemberList', 'sort_index', 'regdate', 'sort_order', ($sort_order == 'asc') ? 'desc' : 'asc')}">
+					{$lang->signup_date}
+					<!--@if($sort_index == 'regdate')-->
+						<!--@if($sort_order == 'asc')-->
+							<em>▲</em>
+						<!--@else-->
+							<em>▼</em>
+						<!--@endif-->
+					<!--@endif-->
+				</a>
+			</th>
+			<th scope="col" class="nowr rx_detail_marks">
+				<a href="{getUrl('', 'module', 'admin', 'act', 'dispMember_titleAdminMemberList', 'sort_index', 'last_login', 'sort_order', ($sort_order == 'asc') ? 'desc' : 'asc')}">
+					{$lang->last_login}
+					<!--@if($sort_index == 'last_login')-->
+						<!--@if($sort_order == 'asc')-->
+							<em>▲</em>
+						<!--@else-->
+							<em>▼</em>
+						<!--@endif-->
+					<!--@endif-->
+				</a>
+			</th>
+			<th scope="col" class="nowr rx_detail_marks">
+				{$lang->member_group}
+			</th>
+			<th scope="col" class="nowr">
+				{$lang->member_title_admin_btn_member_title}
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<!--@foreach($member_list as $member)-->
+			<tr>
+				<!--@if($member_config->member_profile_view == 'Y')-->
+					<td class="nowr rx_detail_marks">
+						<!--@if($member->profile_image)-->
+							<img src="{$member->profile_image->src}" class="profile_img" alt="{$lang->profile_image}" />
+						<!--@else-->
+							<i class="no_profile">?</i>
+						<!--@endif-->
+					</td>
+				<!--@endif-->
+				<!--@foreach($used_identifiers as $name => $title)-->
+					<td class="nowr">
+						<!--@if($name == 'nick_name')-->
+							<a href="#popup_menu_area" class="member_{$member->member_srl}">
+								{$member->nick_name}
+							</a>
+						<!--@elseif($name == 'email_address')-->
+							<a href="{getUrl('', 'module', 'admin', 'act', 'dispMember_titleAdminMemberTitle', 'member_srl', $member->member_srl)}">
+								{$member->email_address}
+							</a>
+						<!--@elseif($name == 'phone_number' && $member['phone_number'])-->
+							<!--@if($member_config->phone_number_hide_country !== 'Y')-->
+								{\Rhymix\Framework\i18n::formatPhoneNumber($member->phone_number, $member->phone_country)}
+							<!--@elseif($member_config->phone_number_default_country == 'KOR' && ($member->phone_country == 'KOR' || $member->phone_country == '82'))-->
+								{\Rhymix\Framework\Korea::formatPhoneNumber($member->phone_number)}
+							<!--@else-->
+								{$member->phone_number}
+							<!--@endif-->
+						<!--@else-->
+							{@ echo getDynamicProperty($member, $name); }
+						<!--@endif-->
+					</td>
+				<!--@endforeach-->
+				<td class="nowr rx_detail_marks">
+					{$member->title->title ?? '-'}
+				</td>
+				<td class="nowr rx_detail_marks" title="{zdate($member->regdate, 'Y-m-d H:i:s')}">
+					{zdate($member->regdate, 'Y-m-d')}
+				</td>
+				<td class="nowr rx_detail_marks" title="{zdate($member->last_login, 'Y-m-d H:i:s')}">
+					{zdate($member->last_login, 'Y-m-d')}
+				</td>
+				<td class="rx_detail_marks">
+					{implode(', ', $member->group_list)}
+				</td>
+				<td class="nowr">
+					<a href="{getUrl('', 'module', 'admin', 'act', 'dispMember_titleAdminMemberTitle', 'member_srl', $member->member_srl)}">
+						{$lang->member_title_admin_btn_member_title}
+					</a>
+				</td>
+			</tr>
+		<!--@endforeach-->
+		<!--@if($total_count == 0)-->
+			<tr>
+				<td>{$lang->msg_no_result}</td>
+			</tr>
+		<!--@endif-->
+	</tbody>
+</table>
+
+<div class="x_clearfix">
+	<!--@if($page_navigation)-->
+		<form method="GET" action="/" class="x_pagination x_pull-left" no-error-return-url="true" style="margin: 0">
+			<input type="hidden" name="module" value="admin" />
+			<input type="hidden" name="act" value="dispMember_titleMemberList" />
+			
+			<ul>
+				<li class="x_disabled"|cond="!$page || $page == 1">
+					<a href="{getUrl('page', '')}">
+						&laquo; {$lang->first_page}
+					</a>
+				</li>
+
+				<!--@if($page_navigation->first_page != 1 && $page_navigation->first_page + $page_navigation->page_count > $page_navigation->last_page - 1 && $page_navigation->page_count != $page_navigation->total_page)-->
+					<li>
+						<a href="#first_go_to" data-toggle title="{$lang->cmd_go_to_page}">&hellip;</a>
+						<span id="first_go_to" class="x_input-append">
+							<input type="number" min="1" max="{$page_navigation->last_page}" required name="page" title="{$lang->cmd_go_to_page}" />
+							<button type="submit" class="x_add-on">Go</button>
+						</span>
+					</li>
+				<!--@endif-->
+				
+				<!--@while($page_no = $page_navigation->getNextPage())-->
+					{@ $last_page = $page_no; }
+					<li class="x_active"|cond="$page_no == $page">
+						<a href="{getUrl('page', $page_no)}">{$page_no}</a>
+					</li>
+				<!--@endwhile-->
+
+				<!--@if($last_page != $page_navigation->last_page && $last_page + 1 != $page_navigation->last_page)-->
+					<li>
+						<a href="#last_go_to" data-toggle title="{$lang->cmd_go_to_page}">&hellip;</a>
+						<span id="last_go_to" class="x_input-append">
+							<input type="number" min="1" max="{$page_navigation->last_page}" required name="page" title="{$lang->cmd_go_to_page}" />
+							<button type="submit" class="x_add-on">Go</button>
+						</span>
+					</li>
+				<!--@endif-->
+				
+				<li class="x_disabled"|cond="$page == $page_navigation->last_page">
+					<a href="{getUrl('page', $page_navigation->last_page)}" title="{$page_navigation->last_page}">
+						{$lang->last_page} &raquo;
+					</a>
+				</li>
+			</ul>
+		</form>
+	<!--@endif-->
+</div>
+
+<form method="GET" action="/" class="search center x_input-append" no-error-return-url="true">
+	<input type="hidden" name="module" value="admin" />
+	<input type="hidden" name="act" value="dispMember_titleAdminMemberList" />
+	<select name="search_target" style="margin-right: 4px;" title="{$lang->search_target}">
+		{@ $lang->search_target_list = array_merge($used_identifiers, lang('member.search_target_list')->getArrayCopy())}
+		<!--@foreach($lang->search_target_list as $key => $val)-->
+			<option value="{$key}" selected|cond="$search_target == $key">
+				{$val}
+			</option>
+		<!--@endforeach-->
+	</select>
+	<input type="search" name="search_keyword" value="{htmlspecialchars($search_keyword, ENT_COMPAT | ENT_HTML401, 'UTF-8', false)}" style="width: 140px;" />
+	<button class="x_btn x_btn-inverse" type="submit">
+		{$lang->cmd_search}
+	</button>
+	<a class="x_btn" href="{getUrl('', 'module', 'admin', 'act', 'dispMember_titleAdminMemberList', 'page', $page)}">
+		{$lang->cmd_cancel}
+	</a>
+</form>

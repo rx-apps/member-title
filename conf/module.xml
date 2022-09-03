@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+	<actions>
+		<!-- (관리자) 뷰 액션 -->
+		<action name="dispMember_titleAdminIndex" type="view" admin_index="true" />
+		<action name="dispMember_titleAdminMemberList" type="view" />
+		<action name="dispMember_titleAdminMemberTitle" type="view" />
+		<action name="dispMember_titleAdminTitleList" type="view" />
+		<action name="dispMember_titleAdminTitleInsert" type="view" />
+		<action name="dispMember_titleAdminTitleUpdate" type="view" />
+		<action name="dispMember_titleAdminTitleDelete" type="view" />
+		
+		<!-- (관리자) 컨트롤러 액션 -->
+		<action name="procMember_titleAdminIndex" type="controller" />
+		<action name="procMember_titleAdminMemberTitle" type="controller" />
+		<action name="procMember_titleAdminTitleInsert" type="controller" />
+	</actions>
+</module>

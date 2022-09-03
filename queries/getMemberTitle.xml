@@ -1,0 +1,11 @@
+<query id="getMemberTitle" action="select">
+	<tables>
+		<table name="member_title_members" />
+	</tables>
+	<columns>
+		<column name="*" />
+	</columns>
+	<conditions>
+		<condition operation="equal" column="member_srl" var="member_srl" filter="number" notnull="notnull" />
+	</conditions>
+</query>

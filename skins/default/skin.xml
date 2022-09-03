@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<skin version="0.2">
+	<title xml:lang="ko">기본 스킨</title>
+	<description xml:lang="ko">기본 스킨</description>
+	<version>1.0</version>
+	<date>2022-09-04</date>
+	<author email_address="rxapps@qroffle.com" link="https://github.com/rx-apps">
+		<name xml:lang="ko">rxApps</name>
+	</author>
+</skin>

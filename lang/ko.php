@@ -34,6 +34,8 @@ $lang->member_title_admin_lbl_advertisement = '커피한잔 대신 (광고)';
 $lang->member_title_admin_txt_advertisement_name = '제 컴퓨터에서는 작동하는데요?! 아니 진짜로 작동하는데 왜 거기서는 작동은 안하는지... 저는 잘 모르겠네요ㅎㅎ;';
 $lang->member_title_admin_txt_advertisement_url = 'https://smartstore.naver.com/dsticker/products/6518098733?nt_source=github&nt_medium=rx-apps&nt_detail=member-title';
 
+$lang->member_title_admin_tit_config = '기본 설정';
+
 /**
  * 관리자 페이지 회원 목록
  */

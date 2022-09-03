@@ -89,6 +89,20 @@ class Member_titleAdminController extends Member_title
 		
 		return true;
 	}
+
+	/**
+	 * 모듈 설정을 변경하는 메뉴입니다.
+	 * 
+	 * @return void
+	 */
+	public function procMember_titleAdminIndex()
+	{
+		$vars = Context::getRequestVars();
+		$this->setConfig($vars);
+		
+		$this->setMessage('success_updated');
+		$this->setRedirectUrl(getNotEncodedUrl('', 'module', 'admin', 'act', 'dispMember_titleAdminIndex'));
+	}
 	
 	/**
 	 * 회원 칭호를 설정하는 메뉴입니다.

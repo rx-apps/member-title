@@ -92,6 +92,13 @@ class Member_titleAdminView extends Member_title
 		$github_url = $oAdminModel->getGithubUrl();
 		Context::set('github_url', $github_url);
 		
+		$config = $this->getConfig();
+		Context::set('config', $config);
+		
+		$oModuleModel = ModuleModel::getInstance();
+		$skin_list = $oModuleModel->getSkins($this->module_path);
+		Context::set('skin_list', $skin_list);
+		
 		$this->setTemplateFile('index');
 	}
 
@@ -289,8 +296,10 @@ class Member_titleAdminView extends Member_title
 
 	/**
 	 * 칭호를 삭제하는 메뉴입니다.
-	 * 
+	 *
 	 * @return void
+	 * @throws DBError
+	 * @throws TargetNotFound
 	 * @noinspection PhpUnused
 	 */
 	public function dispMember_titleAdminTitleDelete()

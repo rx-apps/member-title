@@ -82,16 +82,16 @@ class Member_title extends ModuleObject
 	}
 
 	/**
-	 * @var object? 모듈 설정값 캐시
+	 * @var stdClass? 모듈 설정값 캐시
 	 */
 	protected static $_config_cache = null;
 
 	/**
 	 * 모듈 설정값을 가져옵니다.
 	 * 
-	 * @return object
+	 * @return stdClass
 	 */
-	public function getConfig(): object
+	public function getConfig(): stdClass
 	{
 		if(self::$_config_cache === null)
 		{
@@ -105,7 +105,7 @@ class Member_title extends ModuleObject
 	/**
 	 * 모듈 설정값을 DB에 저장합니다.
 	 * 
-	 * @param object $config
+	 * @param stdClass $config
 	 * @return object
 	 */
 	public function setConfig($config)

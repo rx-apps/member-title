@@ -80,7 +80,7 @@
 							<a href="{getUrl('', 'module', 'admin', 'act', 'dispMember_titleAdminMemberTitle', 'member_srl', $member->member_srl)}">
 								{$member->email_address}
 							</a>
-						<!--@elseif($name == 'phone_number' && $member['phone_number'])-->
+						<!--@elseif($name == 'phone_number' && $member->phone_number)-->
 							<!--@if($member_config->phone_number_hide_country !== 'Y')-->
 								{\Rhymix\Framework\i18n::formatPhoneNumber($member->phone_number, $member->phone_country)}
 							<!--@elseif($member_config->phone_number_default_country == 'KOR' && ($member->phone_country == 'KOR' || $member->phone_country == '82'))-->
